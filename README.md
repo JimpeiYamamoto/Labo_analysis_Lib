@@ -30,4 +30,4 @@ from Labo_analysis_Lib import LibEEM
 - `def show_time_intensity(df, ex, em, max_, min_)`
 
 ## お問い合わせ
-- 質問や要望があればtwitter:`@yjimpei_10`まで
+- 質問や要望があれば twitter: `@yjimpei_10` まで
