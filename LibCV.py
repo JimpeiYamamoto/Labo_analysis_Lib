@@ -6,7 +6,7 @@
 #    By: yjimpei <yjimpei@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/01 19:19:40 by yjimpei           #+#    #+#              #
-#    Updated: 2022/02/01 19:39:35 by yjimpei          ###   ########.fr        #
+#    Updated: 2022/02/01 21:48:24 by yjimpei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ def cv_file_to_df(df_name):
 	cv_df[cv_df.columns.values[1]] = cv_df[cv_df.columns.values[1]].astype(float)
 	time_lst = []
 	cv_df = cv_df.reset_index(drop=True)
-	for i in range(len(df_cv['Current/A'])):
+	for i in range(len(cv_df['Current/A'])):
 		time_lst.append(i)
 	cv_df['time'] = time_lst
 	return (cv_df)
