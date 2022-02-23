@@ -119,6 +119,18 @@ def all_csv_to_many_txt(eem_path, save_path):
 		f3 = open(save_path + name + '.txt', 'a')
 		f3.write(all_)
 
+def calc_mq_subtraction_df(df, mq_df, mq_colname):
+	'''
+	MQ引き算後のdfを作成する
+	'''
+	return_df = pd.DataFrame()
+	for colum in df.columns.values:
+		if (colum != 'EX') & (colum != 'EM'):
+			return_df[colum] = df[colum] - mq_df[mq_colname]
+	return_df['EX'] = df['EX']
+	return_df['EM'] = df['EM']
+	return (return_df);	
+
 def calcu_std(df, ex, em):
 	'''
 	任意のex/emの標準偏差を算出して返す
@@ -127,8 +139,21 @@ def calcu_std(df, ex, em):
 	kyodo_lst = []
 	colum_lst = df.columns.values
 	for name in colum_lst:
-		kyodo_lst.append(info[name].iloc[0])
+		if (name != 'EX') & (name != 'EM'):
+			kyodo_lst.append(info[name].iloc[0])
 	return (np.std(kyodo_lst))
+
+def	get_std_df(df):
+	'''
+	標準偏差等高線図用のdfを作成する
+	'''
+	std_lst = []
+	for index in range(df.shape[0]):
+		ex = df['EX'].iloc[index]
+		em = df['EM'].iloc[index]
+		std_lst.append(calcu_std(df, ex, em))
+	df['STD'] = std_lst
+	return (df)
 
 def show_time_intensity(df, ex, em, max_, min_):
 	'''
@@ -142,9 +167,10 @@ def show_time_intensity(df, ex, em, max_, min_):
 	print("em=", em)
 	colum_lst = df.columns.values
 	for name in colum_lst:
-		x_lst.append(info[name].iloc[0])
-		y_lst.append(y)
-		y += 1
+		if (name != 'EX') & (name != 'EM'):
+			x_lst.append(info[name].iloc[0])
+			y_lst.append(y)
+			y += 1
 	print("std=", np.std(x_lst))
 	fig = plt.figure()
 	ax = fig.add_subplot(1, 1, 1)
@@ -154,3 +180,7 @@ def show_time_intensity(df, ex, em, max_, min_):
 	plt.ylim(min_, max_)
 	plt.plot(y_lst, x_lst)
 	plt.show()
+	return_df = pd.DataFrame()
+	return_df['time'] = y_lst
+	return_df['au'] = x_lst
+	return (return_df)
