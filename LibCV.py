@@ -6,7 +6,7 @@
 #    By: yjimpei <yjimpei@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/01 19:19:40 by yjimpei           #+#    #+#              #
-#    Updated: 2022/02/01 21:48:24 by yjimpei          ###   ########.fr        #
+#    Updated: 2022/03/05 12:42:57 by yjimpei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,3 +74,13 @@ def cv_file_to_df(df_name):
 		time_lst.append(i)
 	cv_df['time'] = time_lst
 	return (cv_df)
+
+def concat_cv_df(path_lst):
+	'''
+	cvを繰り返し測定したときのファイルパスのリストを入力すると、
+	連結したdfを返す
+	'''
+	df_lst = []
+	for path in path_lst:
+		df_lst.append(cv_file_to_df(path))
+	return (pd.concat(df_lst))
