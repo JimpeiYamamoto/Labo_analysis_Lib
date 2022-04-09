@@ -6,7 +6,7 @@
 #    By: yjimpei <yjimpei@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/01 19:19:40 by yjimpei           #+#    #+#              #
-#    Updated: 2022/03/05 12:42:57 by yjimpei          ###   ########.fr        #
+#    Updated: 2022/04/10 00:06:46 by yjimpei          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ def show_cv_graph(df_name_lst):
 	ax = fig.add_subplot(1, 1, 1)
 	ax.set_xlabel('Potential/V')
 	ax.set_ylabel('Current/A')
+	ax.legend()
 	i = 0
 	for cv_df in cv_df_lst:
 		ax.scatter(cv_df[cv_df.columns.values[0]], cv_df[cv_df.columns.values[1]], s=2, label=str(df_name_lst[i]))
